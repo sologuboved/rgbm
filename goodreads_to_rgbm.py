@@ -1,7 +1,11 @@
 from goodreads_librarian import Librarian
 
 
-class
+class Finder(Librarian):
+    def __init__(self, books_json):
+        super(Finder, self).__init__(books_json)
+        self.namesakes = set()
+
 
 
 
