@@ -1,5 +1,4 @@
 import json
-from global_vars import *
 
 
 def load_json(json_file):
