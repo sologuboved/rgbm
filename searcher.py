@@ -17,9 +17,6 @@ def search(author, title):
 
     driver.switch_to.frame(driver.find_element_by_xpath('//frame[@src="/opacg/html/frame2.xml"]'))
     result = driver.find_element_by_class_name('div_margin_right').text
-    # print(result.text)
-    # "Базовый Расширенный Профессиональный"
-    # "По данному запросу ничего не найдено"
     return result
 
 
