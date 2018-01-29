@@ -5,13 +5,12 @@ from searcher import search
 
 
 class Finder(Librarian):
-    def __init__(self, books_json, missing_json):
-        super(Finder, self).__init__(books_json)
-        self.missing_json = missing_json
+    def __init__(self, books_json, shelf=SOONER_SHELF, starting_date=None):
+        super(Finder, self).__init__(books_json, shelf, starting_date)
         self.namesakes = set()
-        self.stopped_at = None
+        # self.stopped_at = None
 
-    def find_by_author(self, starting_index=1):
+    def find(self, starting_index=1):
         ind = starting_index
         total = len(self.to_read)
         for book in self.to_read[(ind - 1):]:
@@ -22,21 +21,25 @@ class Finder(Librarian):
                 continue
             else:
                 self.namesakes.add(author)
-            author_abbrev = book[ABBREV]
+            author_abbrev = book[ABBR_AUTHOR]
             title = book[TITLE]
-            result = search(author_abbrev, '')
-            if ZERO in result:
-                print(author, title, "is missing")
-            elif ERROR in result:
-                self.stopped_at = ind
-                break
+            title_abbrev = book[ABBR_TITLE]
+            result = search(author_abbrev, title_abbrev)
+            if result == GLITCH:
+                print("!!!!!!!!!!! Glitch at", author, '-', title)
+            elif UNDERLOADED in result:
+                print("!!!!!!!!!!!", author, '-', title, 'underloaded')
+                # self.stopped_at = ind
+                # break
+            elif ZERO in result:
+                print(author, '-', title, "is missing")
             else:
-                fname = FOLDER_FOUND + author_abbrev + str(ind) + '.txt'
+                fname = FOLDER_FOUND + self.shelf + str(ind) + '.txt'
                 write_in_txt(fname, author + '\n' + title + '\n\n' + result)
             ind += 1
-        print(self.stopped_at)
+        # print(self.stopped_at)
 
 
 if __name__ == '__main__':
-    finder = Finder(GR_JSON, MISSING_JSON)
-    finder.find_by_author(44)
+    finder = Finder(GR_JSON, shelf=RGBM_SHELF)
+    finder.find(13)  #13

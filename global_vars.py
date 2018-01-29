@@ -7,10 +7,15 @@ FOLDER_FOUND = 'found_soon/'
 
 SHELVES = 'shelves'
 TO_READ_SHELF = 'to-read'
+NOT_YET_SHELF = 'not_yet'
 SOONER_SHELF = 'the_sooner_the_better'
+RGBM_SHELF = 'ргбм'
 AUTHOR = 'author'
 TITLE = 'title'
-ABBREV = 'abbreviated'
+DATE = "date_added"
+ABBR_AUTHOR = 'abbreviated_author'
+ABBR_TITLE = 'abbreviated_title'
 
 ZERO = "По данному запросу ничего не найдено"
-ERROR = "Базовый Расширенный Профессиональный"
+UNDERLOADED = "Базовый Расширенный Профессиональный"
+GLITCH = 'glitch'

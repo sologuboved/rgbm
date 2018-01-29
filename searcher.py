@@ -2,7 +2,8 @@ import time
 import selenium.webdriver as webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-from global_vars import CATALOGUE
+from selenium.common.exceptions import NoSuchElementException
+from global_vars import CATALOGUE, GLITCH
 
 
 def search(author, title):
@@ -16,7 +17,10 @@ def search(author, title):
     time.sleep(10)
 
     driver.switch_to.frame(driver.find_element_by_xpath('//frame[@src="/opacg/html/frame2.xml"]'))
-    result = driver.find_element_by_class_name('div_margin_right').text
+    try:
+        result = driver.find_element_by_class_name('div_margin_right').text
+    except NoSuchElementException:
+        result = GLITCH
     driver.close()
     return result
 
