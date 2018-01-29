@@ -26,5 +26,6 @@ def search(author, title):
 
 
 if __name__ == '__main__':
-    r = search('Diamond', '')
-    print(r)
+    pass
+    # res = search('Diamond', '')
+    # print(res)
