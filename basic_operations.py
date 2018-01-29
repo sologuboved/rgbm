@@ -13,5 +13,5 @@ def dump_json(entries, json_file):
 
 
 def write_in_txt(fname, content):
-    with open(fname) as handler:
+    with open(fname, 'w') as handler:
         handler.write(content)
