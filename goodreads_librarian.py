@@ -19,7 +19,7 @@ class Librarian(object):
     def collect_books(self):
         all_books = load_json(self.books_json)
         for book in all_books:
-            if TO_READ_SHELF in book[SHELVES]:
+            if SOONER_SHELF in book[SHELVES]:
                 self.to_read.append({AUTHOR: book[AUTHOR], TITLE: book[TITLE], ABBREV: book[AUTHOR].split(',')[0]})
 
     def find_namesakes(self):

@@ -2,7 +2,7 @@ import time
 import selenium.webdriver as webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-from global_vars import CATALOGUE
+from global_vars import CATALOGUE, ZERO
 
 
 def search(author, title):
@@ -22,5 +22,5 @@ def search(author, title):
 
 if __name__ == '__main__':
     pass
-    # res = search('Diamond', '')
-    # print(res)
+    res = search('Diamondddddddddddddd', '')
+    print(res)
