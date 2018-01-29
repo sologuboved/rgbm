@@ -2,9 +2,7 @@ import time
 import selenium.webdriver as webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-
-
-CATALOGUE = 'http://opac.rgub.ru/opacg/guest.html'
+from global_vars import CATALOGUE
 
 
 def search(author, title):
