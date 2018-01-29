@@ -1,6 +1,6 @@
 from goodreads_librarian import Librarian
 from global_vars import *
-from basic_operations import write_in_txt, dump_json
+from basic_operations import write_in_txt
 from searcher import search
 
 
