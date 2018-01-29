@@ -12,11 +12,6 @@ def dump_json(entries, json_file):
         json.dump(entries, handler)
 
 
-def prettyprint(books):
-    index = 1
-    for book in books:
-        print(index)
-        index += 1
-        print(AUTHOR + ':', book[AUTHOR])
-        print(TITLE + ':', book[TITLE])
-        print()
+def write_in_txt(fname, content):
+    with open(fname) as handler:
+        handler.write(content)
