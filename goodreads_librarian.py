@@ -12,7 +12,7 @@ class Librarian(object):
         string = ''
         ind = 1
         for book in self.to_read:
-            string += "%d\nauthor: %s\ntitle: %s\n\n" % (ind, book[AUTHOR], book[TITLE])
+            string += "%d\nauthor: %s\ntitle: %s\n, %s\n\n" % (ind, book[AUTHOR], book[TITLE], book[ABBREV])
             ind += 1
         return string
 
@@ -20,15 +20,14 @@ class Librarian(object):
         all_books = load_json(self.books_json)
         for book in all_books:
             if TO_READ_SHELF in book[SHELVES]:
-                self.to_read.append({AUTHOR: book[AUTHOR], TITLE: book[TITLE]})
+                self.to_read.append({AUTHOR: book[AUTHOR], TITLE: book[TITLE], ABBREV: book[AUTHOR].split(',')[0]})
 
     def find_namesakes(self):
         names = dict()
         for book in self.to_read:
-            author = book[AUTHOR]
-            name = author.split(',')[0]
+            name = book[ABBREV]
             books_by = names.get(name, list())
-            books_by.append((author, book[TITLE]))
+            books_by.append((book[AUTHOR], book[TITLE]))
             names[name] = books_by
         for name in names:
             books_by = names[name]
