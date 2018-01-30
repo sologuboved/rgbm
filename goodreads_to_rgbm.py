@@ -21,6 +21,7 @@ class Finder(Librarian):
             num_attempts = 0
             while num_attempts < MAX_ATTEMPTS:
                 if UNDERLOADED in result:
+                    print('attempt', num_attempts)
                     sleep(LONG_SLEEP)
                     result = search('', title_abbrev)
                     num_attempts += 1
