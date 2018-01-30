@@ -23,3 +23,7 @@ def search(author, title):
         result = GLITCH
     driver.close()
     return result
+
+
+if __name__ == '__main__':
+    search('Bataille', '')
