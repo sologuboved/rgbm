@@ -19,3 +19,4 @@ ABBR_TITLE = 'abbreviated_title'
 ZERO = "По данному запросу ничего не найдено"
 UNDERLOADED = "Базовый Расширенный Профессиональный"
 GLITCH = 'glitch'
+THERE = "Движение экземпляров"

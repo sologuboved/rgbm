@@ -29,17 +29,18 @@ class Finder(Librarian):
                 print("!!!!!!!!!!! Glitch at", author, '-', title)
             elif UNDERLOADED in result:
                 print("!!!!!!!!!!!", author, '-', title, 'underloaded')
-                # self.stopped_at = ind
-                # break
             elif ZERO in result:
                 print(author, '-', title, "is missing")
-            else:
+            elif THERE in result:
                 fname = FOLDER_FOUND + self.shelf + str(ind) + '.txt'
                 write_in_txt(fname, author + '\n' + title + '\n\n' + result)
+            else:
+                print(result)
+                fname = FOLDER_FOUND + 'gap' + str(ind) + '.txt'
+                write_in_txt(fname, author + '\n' + title + '\n\n' + result)
             ind += 1
-        # print(self.stopped_at)
 
 
 if __name__ == '__main__':
-    finder = Finder(GR_JSON, shelf=RGBM_SHELF)
-    finder.find(13)  #13
+    finder = Finder(GR_JSON, shelf=NOT_YET_SHELF)
+    finder.find()
