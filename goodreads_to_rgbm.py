@@ -1,14 +1,12 @@
 from goodreads_librarian import Librarian
-from global_vars import *
 from basic_operations import write_in_txt
-from searcher import search
+from searcher import *
 
 
 class Finder(Librarian):
     def __init__(self, books_json, shelf=SOONER_SHELF, starting_date=None):
         super(Finder, self).__init__(books_json, shelf, starting_date)
         self.namesakes = set()
-        # self.stopped_at = None
 
     def find(self, starting_index=1):
         ind = starting_index
@@ -16,31 +14,35 @@ class Finder(Librarian):
         for book in self.to_read[(ind - 1):]:
             print("%d out of %d" % (ind, total))
             author = book[AUTHOR]
-            if author in self.namesakes:
-                ind += 1
-                continue
-            else:
-                self.namesakes.add(author)
             author_abbrev = book[ABBR_AUTHOR]
             title = book[TITLE]
             title_abbrev = book[ABBR_TITLE]
-            result = search(author_abbrev, title_abbrev)
-            if result == GLITCH:
-                print("!!!!!!!!!!! Glitch at", author, '-', title)
-            elif UNDERLOADED in result:
+            result = search('', title_abbrev)
+            num_attempts = 0
+            while num_attempts < MAX_ATTEMPTS:
+                if UNDERLOADED in result:
+                    sleep(LONG_SLEEP)
+                    result = search('', title_abbrev)
+                    num_attempts += 1
+                else:
+                    break
+            else:
                 print("!!!!!!!!!!!", author, '-', title, 'underloaded')
+            if result == GLITCH:
+                print("!!!!!!!!!!!", author, '-', title, 'glitched')
             elif ZERO in result:
                 print(author, '-', title, "is missing")
             elif THERE in result:
+                print(author, '-', title)
                 fname = FOLDER_FOUND + self.shelf + str(ind) + '.txt'
                 write_in_txt(fname, author + '\n' + title + '\n\n' + result)
             else:
+                print(author, '-', title, "is plain weird")
                 print(result)
-                fname = FOLDER_FOUND + 'gap' + str(ind) + '.txt'
-                write_in_txt(fname, author + '\n' + title + '\n\n' + result)
+                print()
             ind += 1
 
 
 if __name__ == '__main__':
     finder = Finder(GR_JSON, shelf=NOT_YET_SHELF)
-    finder.find()
+    finder.find(81)

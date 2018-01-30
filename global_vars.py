@@ -10,6 +10,7 @@ TO_READ_SHELF = 'to-read'
 NOT_YET_SHELF = 'not_yet'
 SOONER_SHELF = 'the_sooner_the_better'
 RGBM_SHELF = 'ргбм'
+
 AUTHOR = 'author'
 TITLE = 'title'
 DATE = "date_added"
@@ -23,3 +24,5 @@ THERE = "Движение экземпляров"
 
 LONG_SLEEP = 5
 SHORT_SLEEP = 3
+
+MAX_ATTEMPTS = 3
