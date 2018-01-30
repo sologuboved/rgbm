@@ -53,5 +53,5 @@ class Finder(Librarian):
 
 if __name__ == '__main__':
 
-    finder = Finder(GR_JSON, shelf=SOONER_SHELF)
+    finder = Finder(GR_JSON, shelf=RGBM_SHELF)
     finder.find()
