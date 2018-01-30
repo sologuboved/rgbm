@@ -14,7 +14,7 @@ class Finder(Librarian):
         for book in self.to_read[(ind - 1):]:
             print("%d out of %d" % (ind, total))
             author = book[AUTHOR]
-            author_abbrev = book[ABBR_AUTHOR]
+            # author_abbrev = book[ABBR_AUTHOR]
             title = book[TITLE]
             title_abbrev = book[ABBR_TITLE]
             result = search('', title_abbrev)
@@ -45,5 +45,5 @@ class Finder(Librarian):
 
 
 if __name__ == '__main__':
-    finder = Finder(GR_JSON, shelf=NOT_YET_SHELF)
-    finder.find(81)
+    finder = Finder(GR_JSON, shelf=SOONER_SHELF)
+    finder.find()
