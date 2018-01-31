@@ -32,13 +32,13 @@ class Finder(Librarian):
 
             result = search(author_abbrev, title_abbrev)
 
-            num_attempts = 0
-            while num_attempts < MAX_ATTEMPTS:
+            num_attempts = 1
+            while num_attempts <= MAX_ATTEMPTS:
                 if UNDERLOADED in result:
+                    num_attempts += 1
                     print('attempt', num_attempts)
                     sleep(LONG_SLEEP)
                     result = search('', title_abbrev)
-                    num_attempts += 1
                 else:
                     break
             else:
@@ -63,4 +63,4 @@ class Finder(Librarian):
 if __name__ == '__main__':
 
     finder = Finder(GR_JSON, shelf=TO_READ_SHELF, starting_date='30.01.2018')
-    finder.find()
+    finder.find(by_author=False)
