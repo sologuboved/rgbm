@@ -9,19 +9,28 @@ class Finder(Librarian):
         super(Finder, self).__init__(books_json, shelf, starting_date)
         self.namesakes = set()
 
-    def find(self, starting_index=1):
+    def find(self, starting_index=1, by_author=True, by_title=True):
 
         ind = starting_index
         total = len(self.to_read)
 
         for book in self.to_read[(ind - 1):]:
             print("%d out of %d" % (ind, total))
-            author = book[AUTHOR]
-            # author_abbrev = book[ABBR_AUTHOR]
-            title = book[TITLE]
-            title_abbrev = book[ABBR_TITLE]
 
-            result = search('', title_abbrev)
+            author = book[AUTHOR]
+            title = book[TITLE]
+
+            if by_author:
+                author_abbrev = book[ABBR_AUTHOR]
+            else:
+                author_abbrev = ''
+
+            if by_title:
+                title_abbrev = book[ABBR_TITLE]
+            else:
+                title_abbrev = ''
+
+            result = search(author_abbrev, title_abbrev)
 
             num_attempts = 0
             while num_attempts < MAX_ATTEMPTS:
@@ -53,5 +62,5 @@ class Finder(Librarian):
 
 if __name__ == '__main__':
 
-    finder = Finder(GR_JSON, shelf=RGBM_SHELF)
+    finder = Finder(GR_JSON, shelf=TO_READ_SHELF, starting_date='30.01.2018')
     finder.find()
