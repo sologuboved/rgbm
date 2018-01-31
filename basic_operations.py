@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def load_json(json_file):
@@ -12,6 +13,9 @@ def dump_json(entries, json_file):
 
 
 def write_in_txt(fname, content):
+    folder = os.path.dirname(fname)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
     with open(fname, 'w', encoding='utf-8') as handler:
         handler.write(content)
     print('Success')
