@@ -1,4 +1,5 @@
 from datetime import datetime
+from unidecode import unidecode
 from basic_operations import *
 from global_vars import *
 
@@ -35,10 +36,11 @@ class Librarian(object):
                         continue
                 author = book[AUTHOR]
                 title = book[TITLE]
-                abbr_title = ''.join([char for char in title.split(':')[0] if char.isalnum() or char == ' '])
+                abbr_author = ''.join(char if char != "'" else " " for char in unidecode(author.split(',')[0]))
+                abbr_title = ''.join([unidecode(char) for char in title.split(':')[0] if char.isalnum() or char == ' '])
                 self.to_read.append({AUTHOR: author,
                                      TITLE: title,
-                                     ABBR_AUTHOR: author.split(',')[0],
+                                     ABBR_AUTHOR: abbr_author,
                                      ABBR_TITLE: abbr_title})
 
     def find_namesakes(self):
@@ -63,5 +65,5 @@ class Librarian(object):
 
 
 if __name__ == '__main__':
-    grb = Librarian(GR_JSON, SOONER_SHELF, '1.01.2018')
+    grb = Librarian(GR_JSON, TO_READ_SHELF, None)
     print(grb)
